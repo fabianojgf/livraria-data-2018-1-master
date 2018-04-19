@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Sistema de Livraria</title>
+	<link rel="stylesheet" type="text/css" href="/styles/menu.css">
+	<link rel="stylesheet" type="text/css" href="/styles/rodape.css">
+</head>
+<body>
+	<th:block th:include="fragments/apresentacao :: presentation"></th:block>
+	<th:block th:include="fragments/menu :: menu"></th:block>
+	
+	<h3>Livros</h3>
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<th>Título</th>
+			<th>Data de Publicação</th>
+			<th>Número de Páginas</th>
+			<th>Preço</th>
+			<th> </th>
+		</tr>
+		<tr th:each="livro : ${livros}">
+			<td th:text="${livro.livroID}"></td>
+			<td th:text="${livro.titulo}"></td>
+			<td
+				th:text="${#temporals.format(livro.dataPublicacao, 'dd/MM/yyyy')}"></td>
+			<td th:text="${livro.numeroPaginas}"></td>
+			<td th:text="${livro.preco}"></td>
+			<td>
+				<a th:href="@{/livros/atualizar/}+${livro.livroID}">Atualizar</a>
+			</td>
+		</tr>
+	</table>
+	<br />
+	<a href="/livros/inserir">Inserir Livro</a>
+	<br />
+	<br />
+</body>
+<footer>
+	<th:block th:include="fragments/rodape :: rodape"></th:block>
+</footer>
+</html>
